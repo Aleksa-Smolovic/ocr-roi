@@ -1,0 +1,55 @@
+
+.new-item {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+    border: 0.25px solid silver;
+    border-radius: 5px;
+}
+.list-content {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	background: #fff;
+	margin: 5px 0;
+}
+.list-content span {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 5px 10px;
+}
+.list-content span.preview {
+	width: 55px;
+}
+
+.list-content span.name {
+ 	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.list-content span.options {
+	width: 30px;
+}
+
+
+#output .removed-item {
+    animation: removed-item-animation .6s cubic-bezier(.55,-0.04,.91,.94) forwards;
+}
+
+#output .
+{
+	opacity: 0;
+    animation: openspace .6s ease forwards, new-item-animation .3s .3s cubic-bezier(0,.8,.32,1.07) forwards;
+}
+
+@keyframes openspace {
+    to {height:auto;}
+}
+@keyframes removed-item-animation {
+    from {opacity: 1;transform: scale(1);}
+    to {opacity: 0;transform: scale(0);}
+}
+@keyframes new-item-animation {
+    from {opacity: 0;transform: scale(0);}
+    to {opacity: 1;transform: scale(1);}
+}

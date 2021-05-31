@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: OcrRoi
+
+logging:
+  level:
+    root: info
+
+
+

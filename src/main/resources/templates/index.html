@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR ROI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css"
+        integrity="sha512-jO9KUHlvIF4MH/OTiio0aaueQrD38zlvFde9JoEA+AQaCNxIJoX4Kjse3sO2kqly84wc6aCtdm9BIUpYdvFYoA=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="test.css" />
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">OCR ROI</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <button id="save-btn" class="btn btn-lg mr-2 btn-outline-success my-2 my-sm-0">Save</button>
+            <a href="/ocr-test" class="btn btn-primary btn-lg btn-outline-primary my-2 mx-2 my-sm-0">Test</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-3 p-2">
+                <div class="holder">
+                    <h5 class="p-2" style="border-bottom: 0.25px solid silver;">Document types</h5>
+                    <ul class="px-2" id="document-type-list">
+
+                    </ul>
+                </div>
+
+                <div class="holder mt-2 p-2">
+                    <form id="document-type-form">
+                        <input type="hidden" id="document-type-id" />
+                        <div class="form-group">
+                            <label for="document-type">Document type</label>
+                            <input type="text" class="form-control" id="document-type-name"
+                                placeholder="Enter document type">
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="document-type-file">
+                                <label class="custom-file-label" for="document-type-file">Choose sample
+                                    image...</label>
+                            </div>
+                        </div>
+                        <div class="btn-group btn-group-lg special">
+                            <button class="btn btn-info" id="new-document-type" type="button">New</button>
+                            <button class="btn btn-primary" id="add-document-type" type="button">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="col-6 p-2" id="canvas-holder-wrapper">
+
+                <div class="holder" id="canvas-holder">
+                    <div class="img-container w-100" id="image-container">
+                        <img id="image" src="">
+                    </div>
+                    <div class="w-100" id="upload-placeholder">
+                        <img src="upload.jpg">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-3 p-2">
+
+                <div class="holder">
+                    <h5 class="p-2 fields-label">Fields</h5>
+                    <ul class="px-2" id="field-list">
+                    </ul>
+                </div>
+
+                <div class="holder mt-2 p-2">
+                    <form id="field-form">
+                        <input type="hidden" id="field-id" />
+                        <div class="form-group">
+                            <label for="field-name">Document type field</label>
+                            <input type="text" class="form-control" id="field-name"
+                                placeholder="Enter document type field">
+                        </div>
+                        <div class="btn-group btn-group-lg special">
+                            <button class="btn btn-info" id="new-field" type="button">New</button>
+                            <button class=" btn btn-primary" id="add-field" type="button">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"
+        integrity="sha512-1bpfZkKJ+WlmJN/I2KLm79dSiuOos0ymwL5IovsUVARyzcaf9rSXsVO2Cdg4qlKNOQXh8fd1d0vKeY9Ru3bQDw=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <script src="components.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
